@@ -13,3 +13,17 @@ services:
     entrypoint:
       - python
       - ./endpoints.py
+
+  rest-client:
+    build:
+      context: .
+    container_name: rest-client
+    depends_on:    
+      - rest-server
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+    entrypoint:
+      - python
+      - ./endpoints_tester.py
