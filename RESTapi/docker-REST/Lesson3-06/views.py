@@ -7,10 +7,6 @@ from sqlalchemy import create_engine
 
 import sys
 import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-sys.stderr = codecs.getwriter('utf8')(sys.stderr)
-
-
 
 
 #foursquare_client_id = ''
