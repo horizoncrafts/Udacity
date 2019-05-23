@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  rest-server:
+    build:
+      context: .
+    container_name: rest-server
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+    ports:
+      - 5000:5000
+    entrypoint:
+      - python
+      - ./endpoints.py
