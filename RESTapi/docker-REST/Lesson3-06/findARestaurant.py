@@ -4,8 +4,6 @@ import httplib2
 
 import sys
 import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 foursquare_client_id = '2DAQ4ICYDGWV3PQWJIIGQVYUP0YR50QJWS51YC4WP15IZ45N'
 foursquare_client_secret = 'MQESTKKMTMYQWSYLXC2IYSEMHCXWLLYTAA4VRFDINVB442SC'
@@ -45,7 +43,7 @@ def findARestaurant(mealType, location):
         result = json.loads(h.request(url,'GET')[1])
         #Grab the first image
         #if no image available, insert default image url
-        if result['response']['photos']['items']:
+        if 1==0 and result['response']['photos'] and result['response']['photos']['items']:
             firstpic = result['response']['photos']['items'][0]
             prefix = firstpic['prefix']
             suffix = firstpic['suffix']

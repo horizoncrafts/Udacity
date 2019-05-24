@@ -5,10 +5,8 @@ from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
 
 
-
-
-
 Base = declarative_base()
+
 class Restaurant(Base):
   __tablename__ = 'restaurant'
   id = Column(Integer, primary_key = True)

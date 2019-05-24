@@ -33,7 +33,7 @@ try:
 	resp, result = h.request(url,'POST')
 	if resp['status'] != '200':
 		raise Exception('Received an unsuccessful status code of %s' % resp['status'])
-	print( json.loads(result).iteritems() )
+#	print( json.loads(result).iteritems() )
 
 	url = address + '/restaurants?location=Shanghai+China&mealType=Sandwiches'
 	h = httplib2.Http()
@@ -77,8 +77,10 @@ else:
 	try:
 		print( "Attempting Test 3: Reading the last created restaurant..." )
 		result = all_result
-		restID = result['restaurants'][len(result['restaurants'])-1]['id']
+		restID = result['Restaurants'][len(result['Restaurants'])-1]['id']
+
 		url = address + "/restaurants/%s" % restID
+		print(url)
 		h = httplib2.Http()
 		resp, result = h.request(url,'GET')
 		if resp['status'] != '200':
@@ -96,7 +98,8 @@ else:
 	try:
 		print( "Attempting Test 4: Changing the name, image, and address of the first restaurant to Udacity..." )
 		result = all_result
-		restID = result['restaurants'][0]['id']
+		restID = result['Restaurants'][0]['id']
+		print( 'restID:', restID )
 		url = address + "/restaurants/%s?name=Udacity&address=2465+Latham+Street+Mountain+View+CA&image=https://media.glassdoor.com/l/70/82/fc/e8/students-first.jpg" % restID
 		h = httplib2.Http()
 		resp, result = h.request(url,'PUT')
@@ -115,7 +118,7 @@ else:
 try:
 		print( "Attempting Test 5: Deleteing the second restaurant from the server..." )
 		result = all_result
-		restID = result['restaurants'][1]['id']
+		restID = result['Restaurants'][1]['id']
 		url = address + "/restaurants/%s" % restID
 		h = httplib2.Http()
 		resp, result = h.request(url,'DELETE')
