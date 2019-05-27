@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  rest-server:
+    build:
+      context: ..
+    container_name: rest-server
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+    ports:
+      - 5000:5000
+    entrypoint:
+      - python
+      - ./views.py
+
+  rest-client:
+    build:
+      context: ..
+    container_name: rest-client
+    depends_on:    
+      - rest-server
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+    entrypoint:
+      - python
+      - ./tester.py
