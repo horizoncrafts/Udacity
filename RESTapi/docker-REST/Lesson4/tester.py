@@ -3,6 +3,7 @@ from httplib2 import Http
 import json
 import sys
 import base64
+import requests
 
 
 print( "Running Endpoint Tester....\n" )
@@ -50,25 +51,28 @@ try:
 	h.add_credentials('TinnyTim','Youdacity')
 	url = address + '/bagels'
 	data = dict(username = "Tinny_Tim", password = "youdacity")
-	resp, content = h.request(url,'GET', urlencode(data))
+	resp, content = h.request(url,'GET' )#, urlencode(data))
 	if resp['status'] == '200':
 		raise Exception("Security Flaw: able to log in with invalid credentials")
 except Exception as err:
 	print( "Test 3 FAILED" )
 	print( err.args )
-	sys.exit()
+	#sys.exit()
 else:
 	print( "Test 3 PASS: App checks against invalid credentials" )
 
 
 #TEST 4 TRY TO READ BAGELS WITH VALID CREDENTIALS
+
 try:
 	h = Http()
 	h.add_credentials("TinnyTim", "Udacity")
 	url = address + '/bagels'
-	#data = dict(username = "TinnyTim", password = "Udacity")
-	resp, content = h.request(url,'GET')#, urlencode(data))
-	if resp['status'] != '200':
+	data = dict(username = "TinnyTim", password = "Udacity")
+	resp = requests.get(url, auth=('TinnyTim', 'Udacity'))
+	#resp, content = h.request(url,'GET', urlencode(data))
+	print( 'Re:', type(resp.status_code) )
+	if resp.status_code != 200:
 		raise Exception("Unable to access /bagels with valid credentials")
 except Exception as err:
 	print( "Test 4 FAILED" )
