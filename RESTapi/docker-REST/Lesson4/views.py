@@ -4,7 +4,8 @@ from flask import Flask, jsonify, request, url_for, abort, g
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
-from flask.ext.httpauth import HTTPBasicAuth
+#from flask.ext.httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth() 
 
@@ -14,12 +15,22 @@ engine = create_engine('sqlite:///bagelShop.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
 app = Flask(__name__)
 
 #ADD @auth.verify_password here
 
 #ADD a /users route here
+@app.route('/users', methods = ['POST'])
+def addUser():
+    name = request.json.get('name')
+    password = request.json.get('password')
 
+    newUser = User(name, password)
+    session.add(newUser)
+    sessin.commit()
+
+    return jsonify(newUser.serialize)
 
 
 @app.route('/bagels', methods = ['GET','POST'])
