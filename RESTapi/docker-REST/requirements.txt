@@ -4,3 +4,4 @@ sqlalchemy
 flask_httpauth
 passlib
 requests
+oauth2client

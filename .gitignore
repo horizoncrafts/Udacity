@@ -2,3 +2,5 @@ etc.txt
 RESTapi/docker-REST/Lesson3-06/__pycache__
 restaurants.db
 bagelShop.db
+RESTapi/docker-REST/Lesson4-11/__pycache__
+*.db
